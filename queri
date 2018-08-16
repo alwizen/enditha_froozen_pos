@@ -1,0 +1,63 @@
+Stok barang
+
+SELECT 
+	b.kd_barang,
+    b.nama_barang,
+    b.harga_jual,
+    b.harga_beli,
+    s.nama_supplier,
+    IF(SUM(dp.jumlah) IS NULL,0,SUM(dp.jumlah)) as jml_beli,
+    IF(SUM(oi.qty) IS NULL,0,SUM(oi.qty)) as jml_jual,
+    ((IF(SUM(dp.jumlah) IS NULL,0,SUM(dp.jumlah))) - (IF(SUM(oi.qty) IS NULL,0,SUM(oi.qty)))) as stok
+FROM `barang` b
+LEFT JOIN supplier s ON b.id_supplier=s.id_supplier
+LEFT JOIN det_pembelian dp ON dp.kd_barang=b.kd_barang
+LEFT JOIN order_items oi ON oi.id_barang=b.kd_barang
+GROUP BY b.kd_barang
+ORDER BY `nama_barang` ASC
+---------------
+jum hri ini
+
+select tanggal, 
+SUM(harga*jumlah) AS total
+FROM penjualan p
+LEFT JOIN det_penjualan dp ON p.id_penjualan = dp.id_penjualan
+WHERE tanggal=DATE(NOW())
+GROUP BY tanggal
+--------------------------------------
+
+input  type="text" value="<?php echo tgl_indo(date('Y-m-d')); ?>"  class="form-control" placeholder="*Masukan Tanggal "/>
+                        <input type="hidden" name="tanggal" id="tanggal" value="<?php echo date('Y-m-d'); ?>"  class="form-control"/>
+
+Data Barang
+
+SELECT 
+	b.kd_barang,
+    b.nama_barang,
+    b.harga_jual,
+    b.harga_beli,
+    s.nama_supplier,
+    IF(SUM(dp.jumlah) IS NULL,0,SUM(dp.jumlah)) as jml_beli,
+    ((IF(SUM(dp.jumlah) IS NULL,0,SUM(dp.jumlah))) - (IF(SUM(oi.qty) IS NULL,0,SUM(oi.qty)))) as stok
+FROM `barang` b
+LEFT JOIN supplier s ON b.id_supplier=s.id_supplier
+LEFT JOIN det_pembelian dp ON dp.kd_barang=b.kd_barang
+LEFT JOIN order_items oi ON oi.id_barang=b.kd_barang
+GROUP BY b.kd_barang
+ORDER BY `nama_barang` ASC
+
+------------------------------------------------------------------
+
+kurang dari <= 5
+
+SELECT 
+                                   b.kd_barang,
+                                   b.nama_barang,
+                                   ((IF(SUM(dp.jumlah) IS NULL,0,SUM(dp.jumlah))) - (IF(SUM(oi.qty) IS NULL,0,SUM(oi.qty)))) as stok
+                                    FROM `barang` b
+                                    LEFT JOIN det_pembelian dp ON dp.kd_barang=b.kd_barang
+                                    LEFT JOIN order_items oi ON oi.id_barang=b.kd_barang
+                                    GROUP BY b.kd_barang
+                                    HAVING ((IF(SUM(dp.jumlah) IS NULL,0,SUM(dp.jumlah))) - (IF(SUM(oi.qty) IS NULL,0,SUM(oi.qty)))) <=5
+                                    ORDER BY `nama_barang` ASC
+                                    
