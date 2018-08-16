@@ -31,6 +31,4 @@ $koneksi->close();
 
 //now print the data
 print json_encode($data);
-
-
 ?>

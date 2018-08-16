@@ -89,33 +89,4 @@ $sql = mysqli_query($koneksi, $query);
  <script src="../js/jquery-3.3.1.min.js"></script>
 <script src="../js/jquery-ui.js"></script>
 <script>
-// $(document).ready(function(){
-//   $.datepicker.setDefaults({
-//     dateFormat: 'yy-mm-dd'
-//   });
-//   $(function(){
-//     $("#From").datepicker();
-//     $("#to").datepicker();
-//   });
-//   $('#range').click(function(){
-//     var From = $('#From').val();
-//     var to = $('#to').val();
-//     if(From != '' && to != '')
-//     {
-//       $.ajax({
-//         url:"range_penjualan.php",
-//         method:"POST",
-//         data:{From:From, to:to},
-//         success:function(data)
-//         {
-//           $('#purchase_order').html(data);
-//         }
-//       });
-//     }
-//     else
-//     {
-//       alert("Please Select the Date");
-//     }
-//   });
-// });
 </script>
