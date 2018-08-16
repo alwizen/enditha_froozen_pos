@@ -30,7 +30,6 @@ $pdf->ln(1);
 $pdf->SetFont('Arial','B',14);
 $pdf->ln(1);
 $pdf->Cell(18,0.7,"NOTA PENJUALAN",0,10,'C');
-$pdf->ln(1);
 $pdf->SetFont('Arial','B',10);
 // $pdf->Cell(5,0.7,"Di cetak pada : ".date("D d-M-Y"),0,0,'C');
 $pdf->ln(1);
@@ -45,13 +44,16 @@ $pdf->SetFont('Arial','',10);
 
 $no=1;
 $id_penjualan = $_GET['id_penjualan'];
-$grand_total = 0;
-$bayar = 0;
-$kembali = 0;
+$grand_total  = 0;
+$jumlah       = 0;
+$bayar        = 0;
+$kembali      = 0;
+$kasir        = 0;
 $query=mysqli_query($koneksi,"SELECT
                                         p.id_penjualan, 
                                         kd_penjualan, 
                                         p.tanggal,
+                                        p.kasir,
                                         jumlah,
                                         nama_barang,
                                         harga_jual,
@@ -73,12 +75,15 @@ while($lihat=mysqli_fetch_array($query)){
      $pdf->Cell(2, 0.8, $lihat['jumlah'],1, 0, 'C');
      $pdf->Cell(4.5, 0.8, Rp($lihat['grand_total']), 1, 1,'C');
      $grand_total += $lihat['grand_total'];
-     $bayar = $lihat['total_dibayarkan'];
-     $kembali = $lihat['total_kembalian'];
+     $jumlah      += $lihat['jumlah'];
+     $bayar        = $lihat['total_dibayarkan'];
+     $kembali      = $lihat['total_kembalian'];
+     $kasir        = $lihat['kasir'];
      $no++;
 }
 $pdf->SetFont('Arial', 'B', 10);      
-$pdf->Cell(12.5, 0.8, "Grand Total ", 1, 0,'R');  
+$pdf->Cell(10.5, 0.8, "Grand Total ", 1, 0,'R');
+$pdf->Cell(2, 0.8, $jumlah, 1, 0, 'C');
 $pdf->Cell(4.5, 0.8, Rp($grand_total), 1, 0,'C');
 $pdf->ln();
 $pdf->SetFont('Arial', '', 10);
@@ -90,11 +95,11 @@ $pdf->Cell(4.5, 0.8, Rp($kembali), 1, 0, 'C');
 
 $pdf->SetFont('Arial', 'I', 10);
 $pdf->ln(1);
-$pdf->MultiCell(19.5, 2, 'Pekalongan, ' . tgl_indo(date("Y-m-d")) . '', 0, 'L');
+$pdf->MultiCell(19.5, 2, 'Batang, ' . tgl_indo(date("Y-m-d")) . '', 0, 'L');
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->ln(1);
 $pdf->SetFont('Arial', 'U', 10);
-$pdf->MultiCell(19.5, 0.8, ' ' . $nama . ' ', 0, 'L');
+$pdf->MultiCell(19.5, 0.8, ' ' . $kasir . ' ', 0, 'L');
 $pdf->Output("nota.pdf","I");
 
 ?>

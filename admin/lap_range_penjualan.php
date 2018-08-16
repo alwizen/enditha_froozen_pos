@@ -32,7 +32,7 @@ $pdf->ln(1);
 $pdf->SetFont('Arial','B',10);
 // $pdf->Cell(5,0.7,"Di cetak pada : ".date("D-d/m/Y"),0,0,'C');
 $pdf->ln(1);
-$pdf->Cell(6,0.7,"Dari : ".$_POST['dari'] ." Sampai ".$_POST['sampai'],0,0,'C');
+$pdf->Cell(9,0.7,"Dari : ".tgl_indo($_POST['dari']) ." - Sampai :".tgl_indo($_POST['sampai']),0,0,'C');
 $pdf->ln(1);
 $pdf->SetFont('Arial','B',10);
 $pdf->Cell(1, 0.8, 'No ', 1, 0, 'C');
@@ -60,7 +60,7 @@ $query=mysqli_query($koneksi,"SELECT
           LEFT JOIN barang b ON dp.kd_barang=b.kd_barang
           LEFT JOIN pelanggan pl ON dp.id_pelanggan = pl.id_pelanggan
           WHERE p.tanggal BETWEEN '".$_POST["dari"]."' AND '".$_POST["sampai"]."' 
-          GROUP BY p.id_penjualan ORDER BY p.tanggal ASC");
+          GROUP BY id_det_penjualan ORDER BY p.tanggal ASC");
 while($lihat=mysqli_fetch_array($query)){
 	$pdf->Cell(1, 0.8, $no , 1, 0, 'C');
 	$pdf->Cell(4, 0.8, $lihat['kd_penjualan'],1, 0, 'C');

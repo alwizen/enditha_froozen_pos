@@ -34,7 +34,7 @@ $sql = mysqli_query($koneksi, $query);
             <input type="date" name="sampai" id="sampai" class="form-control" required />
         </div>
         <div class="col-md-8">
-          <button class="btn btn-info" type="submit"> <span class="glyphicon glyphicon-print"></span> Cetak</button>
+          <button class="btn btn-info" type="submit" formtarget="_blank"> <span class="glyphicon glyphicon-print"></span> Cetak</button>
         </div>
         </form>
 

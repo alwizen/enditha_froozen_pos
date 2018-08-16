@@ -2,7 +2,7 @@
  $url    = 'http://localhost/enditha'; 
  $dbhost = 'localhost';  
  $dbuser = 'root'; 
- $dbpass = '';  
+ $dbpass = 'BAba55ko';  
  $dbname = 'enditha';  
  
  $koneksi = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);  //koneksi Database
