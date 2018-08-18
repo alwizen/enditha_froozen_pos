@@ -33,14 +33,15 @@ $pdf->ln(1);
 $pdf->SetFont('Arial','B',10);
 $pdf->Cell(5,0.7,"Di cetak pada : ".date("D-d/m/Y"),0,0,'C');
 $pdf->ln(1);
-$pdf->Cell(6,0.7,"Dari : ".$_POST['dari'] ." Sampai ".$_POST['sampai'],0,0,'C');
+$pdf->Cell(9, 0.7, "Dari : " . tgl_indo($_POST['dari']) . " - Sampai :" . tgl_indo($_POST['sampai']), 0, 0, 'C');
 $pdf->ln(1);
 $pdf->SetFont('Arial','B',10);
 $pdf->Cell(1, 0.8, 'No ', 1, 0, 'C');
 $pdf->Cell(4, 0.8, 'Tanggal', 1, 0, 'C');
 $pdf->Cell(4, 0.8, 'Nama Barang', 1, 0, 'C');
 $pdf->Cell(4, 0.8, 'Nama Supplier', 1, 0, 'C');
-$pdf->Cell(4.5, 0.8, 'Jumlah', 1, 0, 'C');
+$pdf->Cell(4, 0.8, 'Harga', 1, 0, 'C');
+$pdf->Cell(3, 0.8, 'Jumlah', 1, 0, 'C');
 $pdf->Cell(4, 0.8, 'Grand Total', 1, 1, 'C');
 $pdf->SetFont('Arial','',10);
 
@@ -52,6 +53,7 @@ $query=mysqli_query($koneksi,"SELECT
                               p.kd_pembelian,
                               p.tanggal,
                               b.nama_barang,
+                              b.harga_beli,
                               dp.jumlah,
                               s.nama_supplier,
                               SUM(dp.jumlah*b.harga_beli) AS grand_total
@@ -66,7 +68,8 @@ while($lihat=mysqli_fetch_array($query)){
      $pdf->Cell(4, 0.8, tgl_indo($lihat["tanggal"]), 1, 0,'C');
      $pdf->Cell(4, 0.8, $lihat['nama_barang'],1, 0, 'C');
      $pdf->Cell(4, 0.8, $lihat['nama_supplier'],1, 0, 'C');
-     $pdf->Cell(4.5, 0.8, $lihat['jumlah'],1, 0, 'C');
+     $pdf->Cell(4, 0.8, $lihat['harga_beli'],1, 0, 'C');
+     $pdf->Cell(3, 0.8, $lihat['jumlah'], 1, 0, 'C');
      $pdf->Cell(4, 0.8, Rp($lihat['grand_total']), 1, 1,'C');
      $grand_total += $lihat['grand_total'];
      $no++;
