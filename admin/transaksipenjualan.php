@@ -163,6 +163,16 @@ include '../koneksi.php';
 
           $("#add_item").on("click", function() {
               // Add data to order_items before it's submitted
+              var url = "cek_stok.php?id="+$("#item").val();
+              $.get(url,function(response){
+                console.log(response);
+                var stok = parseInt(response.stok);
+                var jumlah = parseInt($("#jumlah").val()); 
+
+                if (stok < jumlah ) {
+                  alert("stok tidak cukup");
+                  return false;
+                }else{
               $order_items.push({
                 "id_pelanggan":$("#id_pelanggan").val(),
                 "kd_barang": $("#item").val(),
@@ -183,21 +193,28 @@ include '../koneksi.php';
               console.log($order_items);
               $number++;
               formBarang.getTotal();
+                              }
+              },'json')  
           });
-
+          
           $("#total_dibayarkan").on("keyup", function() {
               $("#total_kembalian").val(parseInt($(this).val()) - $total_harga);
           });
            $(document).on("click", ".hapus_item", function(e){
-            // console.log('hapus');
-            var tempId = $(this).attr('data-id');
-            console.log(tempId);
-            var temp_order_items = $order_items.filter(function(obj) {
-              return obj.temp_id != tempId;
-            });
-            $order_items = temp_order_items;
-            $(this).parent().parent().remove();
-            formBarang.getTotal();
+                        // console.log('hapus');
+            var del = confirm('Apakah Anda yakin akan menghapus data ini?');
+            if (del == true) {
+             var tempId = $(this).attr('data-id');
+                console.log(tempId);
+                var temp_order_items = $order_items.filter(function(obj) {
+                  return obj.temp_id != tempId;
+                });
+                $order_items = temp_order_items;
+                $(this).parent().parent().remove();
+                formBarang.getTotal(); 
+            }else{
+              return false;
+            }           
           });
 
           $("#checkout").on("click", function() {

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 16, 2018 at 10:08 AM
+-- Generation Time: Sep 05, 2018 at 08:14 AM
 -- Server version: 10.0.34-MariaDB-0ubuntu0.16.04.1
 -- PHP Version: 7.2.5-1+ubuntu16.04.1+deb.sury.org+1
 
@@ -48,7 +48,7 @@ INSERT INTO `barang` (`kd_barang`, `nama_barang`, `id_supplier`, `harga_jual`, `
 (52, 'Nugget pop', 7, 20000, 17000, '2019-08-21'),
 (53, 'Tempura ikan', 7, 21000, 18000, '2019-06-05'),
 (54, 'Tempura cumi', 7, 21000, 1900, '2019-07-24'),
-(55, 'Baso ikan', 5, 15000, 12000, '2019-08-14'),
+(55, 'Baso ikan', 8, 5000, 12000, '2018-08-16'),
 (56, 'Baso cumi', 5, 15000, 12000, '2019-08-06'),
 (57, 'Baso ayam', 5, 15000, 12000, '2019-08-01'),
 (58, 'Scallop Stik', 9, 19000, 18000, '2019-06-12'),
@@ -150,7 +150,14 @@ INSERT INTO `det_penjualan` (`id_det_penjualan`, `id_penjualan`, `kd_barang`, `i
 (31, 22, 57, 1, 2, 15000, 40000, 10000),
 (32, 0, 47, 1, 6, 24000, 150000, 6000),
 (33, 23, 48, 2, 2, 24000, 50000, 2000),
-(34, 24, 55, 6, 3, 15000, 50000, 5000);
+(34, 24, 55, 6, 3, 15000, 50000, 5000),
+(35, 25, 47, 13, 2, 24000, 300000, 27000),
+(36, 25, 49, 13, 3, 15000, 300000, 27000),
+(37, 25, 50, 13, 2, 22000, 300000, 27000),
+(38, 25, 62, 13, 2, 17000, 300000, 27000),
+(39, 25, 64, 13, 2, 15000, 300000, 27000),
+(40, 25, 63, 13, 2, 15000, 300000, 27000),
+(41, 25, 51, 13, 2, 21000, 300000, 27000);
 
 -- --------------------------------------------------------
 
@@ -259,7 +266,8 @@ INSERT INTO `penjualan` (`id_penjualan`, `kd_penjualan`, `tanggal`, `kasir`) VAL
 (21, '2018081385D6', '2018-08-13', ''),
 (22, '2018081669C5', '2018-08-16', ''),
 (23, '20180816D476', '2018-08-16', 'Administrator'),
-(24, '20180816A353', '2018-08-16', 'Najwa');
+(24, '20180816A353', '2018-08-16', 'Najwa'),
+(25, '201808168904', '2018-08-16', 'Najwa');
 
 -- --------------------------------------------------------
 
@@ -407,7 +415,7 @@ ALTER TABLE `det_pembelian`
 -- AUTO_INCREMENT for table `det_penjualan`
 --
 ALTER TABLE `det_penjualan`
-  MODIFY `id_det_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_det_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
 -- AUTO_INCREMENT for table `pelanggan`
 --
@@ -422,7 +430,7 @@ ALTER TABLE `pembelian`
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `sales`
 --
@@ -432,7 +440,7 @@ ALTER TABLE `sales`
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `id_supplier` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_supplier` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `users`
 --
